@@ -18,6 +18,7 @@
   const classNames = {
     books: {
       favoriteBook: 'favorite',
+      hidden: 'hidden',
     },
   };
 
@@ -28,9 +29,7 @@
   const favoriteBooks = [];
   // console.log(booksList);
   const filters = [];
-  console.log(filters);
   const form = document.querySelector(select.containerOf.form);
-  console.log(form.firstChild.tagName);
 
   function render() {
 
@@ -86,9 +85,30 @@
         const valueIndex = filters.indexOf(event.target.value);
         filters.splice(valueIndex, 1);
       }
-      console.log(filters);
+      filterBooks();
     });
   }
   initActions();
+
+  function filterBooks() {
+    for (let book of books) {
+      let shouldBeHidden = false;
+
+      for (const filter of filters){
+
+        if(!book.details[filter]){
+          shouldBeHidden = true;
+          break;
+        }
+      }
+      const bookCover = document.querySelector('.book__image[data-id="' + book.id + '"]');
+
+      if(shouldBeHidden) {
+        bookCover.classList.add(classNames.books.hidden);
+      } else {
+        bookCover.classList.remove(classNames.books.hidden);
+      }
+    }
+  }
 }
 
