@@ -83,7 +83,7 @@
     initActions() {
       const thisBooksList = this;
 
-      thisBooksList.dom.booksList.addEventListener('dblclick', function(event) {
+      thisBooksList.dom.booksList.addEventListener('click', function(event) {
         event.preventDefault();
 
         // console.log(event.target.offsetParent);
